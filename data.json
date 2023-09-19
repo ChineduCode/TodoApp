@@ -1,0 +1,17 @@
+[
+    {
+        "id": 1,
+        "text": "Going to the market tomorrow",
+        "completed": false
+    },
+    {
+        "id": 2,
+        "text": "Travelling to calabar next week",
+        "completed": false
+    },
+    {
+        "id": 3,
+        "text": "Coding for my portfolio website tomorrow",
+        "completed": true
+    }
+]
