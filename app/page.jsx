@@ -3,14 +3,25 @@
 import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "@/components/Todo"
-import { useState } from "react"
+import { useState, useEffect } from "react"
 
 export default function TodoApp(){
     let [todos, setTodos] = useState([])
     
-    //filter and get the length of todo.completed === false
-    const notCompleted = todos.filter(todo => !todo.completed)
+    //Load todo from localStorage when the component mount
+    useEffect(() => {
+        const storedTodos = localStorage.getItem('todos');
+        if(storedTodos){
+            setTodos(JSON.parse(storedTodos))
+        }
+    }, []) 
 
+    //Update the localStorage whenever the todo changes
+    useEffect(() => {
+        localStorage.setItem('todos', JSON.stringify(todos))
+    }, [todos])
+    
+    
     function addNewTodo(todo){
         const existingTodo = todos.find(td => td.text.toLowerCase() === todo.text.toLowerCase())
         if(existingTodo){
@@ -24,30 +35,33 @@ export default function TodoApp(){
         setTodos(
             todos.map(todo => 
                 todo.text.toLowerCase() === id.toLowerCase() ? {...todo, completed : true} : todo
-            )
-        )
-    }
+                )
+                )
+            }
 
     function handleDelete(id){
         setTodos(todos.filter(todo => todo.text.toLowerCase() !== id.toLowerCase()))
     }
-
+    
     function deleteAllCompleted(){
         setTodos(todos.filter(todo => !todo.completed))
     }
-
+    
     function getAll(){
         console.log('All')
     }
-
+    
     function filterActive(){
         console.log('Active')
     }
-
+    
     function filterCompleted(){
         console.log('Completed')
     }
-
+    
+    //filter and get the length of todo.completed === false 
+    const notCompleted = todos.filter(todo => !todo.completed)
+    
     return(
         <main className="todo_app"> 
             <Header />
