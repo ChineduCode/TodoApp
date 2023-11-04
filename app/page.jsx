@@ -1,7 +1,6 @@
 import Link from 'next/link'
 
 export default function WelcomePage(){
-    const apiUrl = process.env.API_URL
 
     return(
         <main className="welcome">
