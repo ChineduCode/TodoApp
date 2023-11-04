@@ -8,169 +8,229 @@
 body{
   min-height: 100vh;
   background-color: hsl(236, 33%, 92%);
-  background-image: url('../public/bg-mobile-light.jpg');
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 main{
   padding: 4rem 4%;
+}
+
+input{
   width: 100%;
-}
-
-header{
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
-  .logo{
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: 4px;
-    color: hsl(0, 0, 100%);
-  }
-  .sun-icon{display: none;}
-}
-
-form{
-  margin-top: 3rem;
-  input{
-    width: 100%;
-    padding: 15px;
-    font-size: 16px;
-    border-radius: 7px;
-    border: none;
-    background-color: hsl(0, 0, 100%);
-    color: hsl(235, 19%, 35%);
-  }
-}
-
-.add_new_todo_text{
-  display: block;
-  margin: 2rem 0;
-  text-align: center;
-}
-
-.todos_container{
-  margin: 2rem 0;
+  padding: 15px;
+  font-size: 16px;
+  border-radius: 7px;
+  border: none;
   background-color: hsl(0, 0, 100%);
   color: hsl(235, 19%, 35%);
-  border-radius: 7px;
-  font-size: 15px;
-  box-shadow: 0 0 15px hsl(235, 19%, 35%);
+}
 
-  .todo{
-    padding: 18px 20px;
-    border-bottom: 1px solid hsl(233, 11%, 84%);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-    .left{
-      display: flex;
-      align-items: center;
-      .checkbox{
-        border: 1px solid;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: inline-block;
-        position: relative;
-        img{display: none;}
-      }
+.welcome, .register, .login{
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: hsl(235, 19%, 35%);
 
-      .text{
-        margin: 0 12px;
-        line-break: normal;
-      }
-    }
-
-    .completed{
-      display: flex;
-      align-items: center;
-      .checkbox{
-        border: 1px solid hsl(192, 100%, 67%);
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        display: inline-block;
-        position: relative;
-        //background: linear-gradient(to bottom right hsl(192, 100%, 67%),hsl(280, 87%, 65%));
-        background: hsl(192, 100%, 67%);
-        img{
-          display: unset;
-          position: absolute;
-          top: 20%;
-          left: 20%;
-        }
-      }
-
-      .text{
-        margin-left: 12px;
-        text-decoration: line-through;
-        color: hsl(233, 11%, 84%);
-      }
-    }
-
-    .icon-cross{
-      cursor: pointer;
+  .container{
+    width: 400px;
+    max-width: 100%;
+    .heading{
+      margin-bottom: 15px;
     }
   }
 
-  .bottom{
-    padding: 15px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    color: hsl(236, 9%, 61%);
-    font-size: 14px;
-    position: relative;
-    .filter{
-      position: absolute;
-      top: 5rem;
-      left: 50%;
-      transform: translate(-50%, 0);
-      background-color: hsl(0, 0, 100%);
-      width: 100%;
-      text-align: center;
-      padding: 15px;
-      font-size: 16px;
-      border-radius: 7px;
-      box-shadow: 0 0 15px;
-      span{
-        margin: 0 10px;
-        cursor: pointer;
-      }
+  .form-control{
+    margin: 15px 0;
+    label{
+      display: inline-block;
+      margin-bottom: 5px;
     }
+  }
+  .checkbox{
+    input{
+      width: unset;
+    }
+    label{
+      margin: 0 0 0 10px;
+    }
+  }
 
-    .clear_completed{cursor: pointer;}
+  button{
+    display: inline-block;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    background-color: hsl(235, 19%, 35%);
+    color: hsl(236, 33%, 92%);
+    cursor: pointer;
+  }
+
+  .welcome.heading{
+    text-align: center;
+  }
+
+  .register-and-login-link{
+    margin-top: 10px;
+    a{
+      display: block;
+      margin: 10px 0;
+      color: hsl(235, 19%, 35%);
+    }
   }
 }
 
-@media only screen and (min-width : 800px){
-  body{
-    background-image: url('../public/bg-desktop-light.jpg');
-    display: flex;
-    justify-content: center;
-  }
 
-  main{
-    width: 720px;
+main.todo{
+  width: 100%;
+  background-image: url('../public/bg-mobile-light.jpg');
+  background-size: contain;
+  background-repeat: no-repeat;
+
+  header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  
+    .logo{
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 4px;
+      color: hsl(0, 0, 100%);
+    }
+    .sun-icon{display: none;}
+  }
+  
+  form{
+    margin-top: 3rem;
   }
 
   .todos_container{
+    margin: 2rem 0;
+    background-color: hsl(0, 0, 100%);
+    color: hsl(235, 19%, 35%);
+    border-radius: 7px;
+    font-size: 15px;
+    box-shadow: 0 0 15px hsl(235, 19%, 35%);
+  
+    .todo{
+      padding: 18px 20px;
+      border-bottom: 1px solid hsl(233, 11%, 84%);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      
+      .left{
+        display: flex;
+        align-items: center;
+        .checkbox{
+          border: 1px solid;
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: inline-block;
+          position: relative;
+          img{display: none;}
+        }
+  
+        .text{
+          margin: 0 12px;
+          line-break: normal;
+        }
+      }
+  
+      .completed{
+        display: flex;
+        align-items: center;
+        .checkbox{
+          border: 1px solid hsl(192, 100%, 67%);
+          width: 20px;
+          height: 20px;
+          border-radius: 50%;
+          display: inline-block;
+          position: relative;
+          //background: linear-gradient(to bottom right hsl(192, 100%, 67%),hsl(280, 87%, 65%));
+          background: hsl(192, 100%, 67%);
+          img{
+            display: unset;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+          }
+        }
+  
+        .text{
+          margin-left: 12px;
+          text-decoration: line-through;
+          color: hsl(233, 11%, 84%);
+        }
+      }
+  
+      .icon-cross{
+        cursor: pointer;
+      }
+    }
+  
     .bottom{
-      position: unset;
+      padding: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: hsl(236, 9%, 61%);
+      font-size: 14px;
+      position: relative;
       .filter{
+        position: absolute;
+        top: 5rem;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background-color: hsl(0, 0, 100%);
+        width: 100%;
+        text-align: center;
+        padding: 15px;
+        font-size: 16px;
+        border-radius: 7px;
+        box-shadow: 0 0 15px;
+        span{
+          margin: 0 10px;
+          cursor: pointer;
+        }
+      }
+  
+      .clear_completed{cursor: pointer;}
+    }
+  }
+  .add_new_todo_text{
+    display: block;
+    margin: 2rem 0;
+    text-align: center;
+  }
+}
+
+
+@media only screen and (min-width : 800px){
+  main.todo{
+    background-image: url('../public/bg-desktop-light.jpg');
+    display: flex;
+    justify-content: center;
+
+    .container{
+      width: 720px;
+    }
+
+    .todos_container{
+      .bottom{
         position: unset;
-        background-color: unset;
-        transform: unset;
-        width: unset;
-        padding: unset;
-        text-align: unset;
-        font-size: unset;
-        box-shadow: unset;
+        .filter{
+          position: unset;
+          background-color: unset;
+          transform: unset;
+          width: unset;
+          padding: unset;
+          text-align: unset;
+          font-size: unset;
+          box-shadow: unset;
+        }
       }
     }
   }
+
 }

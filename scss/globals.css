@@ -8,35 +8,13 @@
 body {
   min-height: 100vh;
   background-color: hsl(236, 33%, 92%);
-  background-image: url("../public/bg-mobile-light.jpg");
-  background-size: contain;
-  background-repeat: no-repeat;
 }
 
 main {
   padding: 4rem 4%;
-  width: 100%;
 }
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-header .logo {
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 4px;
-  color: hsl(0, 0%, 100%);
-}
-header .sun-icon {
-  display: none;
-}
-
-form {
-  margin-top: 3rem;
-}
-form input {
+input {
   width: 100%;
   padding: 15px;
   font-size: 16px;
@@ -46,13 +24,77 @@ form input {
   color: hsl(235, 19%, 35%);
 }
 
-.add_new_todo_text {
-  display: block;
-  margin: 2rem 0;
+.welcome, .register, .login {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  color: hsl(235, 19%, 35%);
+}
+.welcome .container, .register .container, .login .container {
+  width: 400px;
+  max-width: 100%;
+}
+.welcome .container .heading, .register .container .heading, .login .container .heading {
+  margin-bottom: 15px;
+}
+.welcome .form-control, .register .form-control, .login .form-control {
+  margin: 15px 0;
+}
+.welcome .form-control label, .register .form-control label, .login .form-control label {
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.welcome .checkbox input, .register .checkbox input, .login .checkbox input {
+  width: unset;
+}
+.welcome .checkbox label, .register .checkbox label, .login .checkbox label {
+  margin: 0 0 0 10px;
+}
+.welcome button, .register button, .login button {
+  display: inline-block;
+  font-size: 18px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  background-color: hsl(235, 19%, 35%);
+  color: hsl(236, 33%, 92%);
+  cursor: pointer;
+}
+.welcome .welcome.heading, .register .welcome.heading, .login .welcome.heading {
   text-align: center;
 }
+.welcome .register-and-login-link, .register .register-and-login-link, .login .register-and-login-link {
+  margin-top: 10px;
+}
+.welcome .register-and-login-link a, .register .register-and-login-link a, .login .register-and-login-link a {
+  display: block;
+  margin: 10px 0;
+  color: hsl(235, 19%, 35%);
+}
 
-.todos_container {
+main.todo {
+  width: 100%;
+  background-image: url("../public/bg-mobile-light.jpg");
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+main.todo header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main.todo header .logo {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 4px;
+  color: hsl(0, 0%, 100%);
+}
+main.todo header .sun-icon {
+  display: none;
+}
+main.todo form {
+  margin-top: 3rem;
+}
+main.todo .todos_container {
   margin: 2rem 0;
   background-color: hsl(0, 0%, 100%);
   color: hsl(235, 19%, 35%);
@@ -60,18 +102,18 @@ form input {
   font-size: 15px;
   box-shadow: 0 0 15px hsl(235, 19%, 35%);
 }
-.todos_container .todo {
+main.todo .todos_container .todo {
   padding: 18px 20px;
   border-bottom: 1px solid hsl(233, 11%, 84%);
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.todos_container .todo .left {
+main.todo .todos_container .todo .left {
   display: flex;
   align-items: center;
 }
-.todos_container .todo .left .checkbox {
+main.todo .todos_container .todo .left .checkbox {
   border: 1px solid;
   width: 20px;
   height: 20px;
@@ -79,18 +121,18 @@ form input {
   display: inline-block;
   position: relative;
 }
-.todos_container .todo .left .checkbox img {
+main.todo .todos_container .todo .left .checkbox img {
   display: none;
 }
-.todos_container .todo .left .text {
+main.todo .todos_container .todo .left .text {
   margin: 0 12px;
   line-break: normal;
 }
-.todos_container .todo .completed {
+main.todo .todos_container .todo .completed {
   display: flex;
   align-items: center;
 }
-.todos_container .todo .completed .checkbox {
+main.todo .todos_container .todo .completed .checkbox {
   border: 1px solid hsl(192, 100%, 67%);
   width: 20px;
   height: 20px;
@@ -99,21 +141,21 @@ form input {
   position: relative;
   background: hsl(192, 100%, 67%);
 }
-.todos_container .todo .completed .checkbox img {
+main.todo .todos_container .todo .completed .checkbox img {
   display: unset;
   position: absolute;
   top: 20%;
   left: 20%;
 }
-.todos_container .todo .completed .text {
+main.todo .todos_container .todo .completed .text {
   margin-left: 12px;
   text-decoration: line-through;
   color: hsl(233, 11%, 84%);
 }
-.todos_container .todo .icon-cross {
+main.todo .todos_container .todo .icon-cross {
   cursor: pointer;
 }
-.todos_container .bottom {
+main.todo .todos_container .bottom {
   padding: 15px;
   display: flex;
   align-items: center;
@@ -122,7 +164,7 @@ form input {
   font-size: 14px;
   position: relative;
 }
-.todos_container .bottom .filter {
+main.todo .todos_container .bottom .filter {
   position: absolute;
   top: 5rem;
   left: 50%;
@@ -135,27 +177,32 @@ form input {
   border-radius: 7px;
   box-shadow: 0 0 15px;
 }
-.todos_container .bottom .filter span {
+main.todo .todos_container .bottom .filter span {
   margin: 0 10px;
   cursor: pointer;
 }
-.todos_container .bottom .clear_completed {
+main.todo .todos_container .bottom .clear_completed {
   cursor: pointer;
+}
+main.todo .add_new_todo_text {
+  display: block;
+  margin: 2rem 0;
+  text-align: center;
 }
 
 @media only screen and (min-width: 800px) {
-  body {
+  main.todo {
     background-image: url("../public/bg-desktop-light.jpg");
     display: flex;
     justify-content: center;
   }
-  main {
+  main.todo .container {
     width: 720px;
   }
-  .todos_container .bottom {
+  main.todo .todos_container .bottom {
     position: unset;
   }
-  .todos_container .bottom .filter {
+  main.todo .todos_container .bottom .filter {
     position: unset;
     background-color: unset;
     transform: unset;
