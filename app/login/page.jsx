@@ -48,7 +48,7 @@ export default function LoginPage(){
                         onChange={passwordVisibility}
                         className="checkbox"
                     />
-                    <label htmlFor="password visibility">See Password</label>
+                    <label htmlFor="password visibility">Show Password</label>
                 </div>
 
                 <button type="submit">Log In</button>

@@ -61,7 +61,7 @@ export default function RegisterPage(){
                         onChange={passwordVisibility}
                         className="checkbox"
                     />
-                    <label htmlFor="password visibility">See Password</label>
+                    <label htmlFor="password visibility">Show Password</label>
                 </div>
 
                 <button type="submit">Register</button>
