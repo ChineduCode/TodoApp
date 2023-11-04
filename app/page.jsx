@@ -11,14 +11,14 @@ export default function WelcomePage(){
 
                 <div className="register-and-login-link">
                     <Link 
-                        href={`${apiUrl}/register`}
+                        href={`/register`}
                         className='register-link'
                     >
                         Register
                     </Link>
 
                     <Link 
-                        href={`${apiUrl}/login`}
+                        href={`/login`}
                         className='login-link'
                     >   
                         Login
