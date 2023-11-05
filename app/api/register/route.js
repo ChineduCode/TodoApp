@@ -1,5 +1,5 @@
 import connectDatabase from "@/connectDB";
-import { User } from "@/Models/User";
+import User from "@/Models/User";
 import bcrypt from 'bcryptjs'
 
 export async function POST(request){

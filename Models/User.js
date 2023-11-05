@@ -13,27 +13,7 @@ const userSchema = new mongoose.Schema({
     }   
 })
 
-//Todo schema
-const todoSchema = new mongoose.Schema({
-    text: {
-        type: String,
-        required: true
-    },
-    completed: {
-        type: Boolean,
-        default: false
-    },
-
-    //Reference to the User who owns this todo
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
-})
-
-//User and Todo models
+//User
 const User = mongoose.models.User || mongoose.model('User', userSchema)
-const Todo = mongoose.models.Todo || mongoose.model('Todo', todoSchema)
 
-export {User, Todo}
+export default User
