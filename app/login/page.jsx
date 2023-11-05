@@ -4,7 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-
 export default function LoginPage(){
     let [username, setUsername] = useState('')
     let [password, setPassword] = useState('')
@@ -30,7 +29,7 @@ export default function LoginPage(){
         e.preventDefault()
 
         if(!username || !password){
-            setError('Please fill all fields')
+            await clearErrorMsg('Please fill in all fields', setError)
             return
         }
 
@@ -49,11 +48,16 @@ export default function LoginPage(){
             router.push('/todo')
             return new Response('Login successful', {status: 200})
         }else{
-            return new Response(setError('Login Error, Invalid crendentials'), {status : 400})
+            await clearErrorMsg('Invalid credentials', setError)
+            return new Response('Login Error, Invalid crendentials', {status : 400})
         }
     }
 
-    function clearErrorMsg(){}
+    async function clearErrorMsg(error, setError){
+        setError(error)
+        await new Promise(resolve => setTimeout(resolve, 8000))
+        setError('')
+    }
 
     return(
         <main className="login">
@@ -67,7 +71,6 @@ export default function LoginPage(){
                         name="username"
                         value={username}
                         onChange={(e)=> setUsername(e.target.value)} 
-                        required
                     />
                 </div>
                 <div className="form-control">
@@ -77,7 +80,6 @@ export default function LoginPage(){
                         name="password"
                         value={password}
                         onChange={(e)=> setPassword(e.target.value)}
-                        required
                     />
                 </div>
                 <div className="form-control checkbox">

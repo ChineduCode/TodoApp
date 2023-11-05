@@ -32,15 +32,18 @@ export default function RegisterPage(){
         
         //Check for the validity of the credential added
         if(!username || !password || !confirmPassword){
-            setError('Please fill in all fields')
+            //setError('Please fill in all fields')
+            await clearErrorMsg('Please fill in all fields', setError)
             return
         }
         if(password.length < 8){
-            setError('Password must contain more than eight characters')
+            //setError('Password must contain more than eight characters')
+            await clearErrorMsg('Password must contain more than eight characters', setError)
             return
         }
         if(password !== confirmPassword){
-            setError('Passwords do not match')
+            //setError('Passwords do not match')
+            await clearErrorMsg('Passwords do not match', setError)
             return
         }
 
@@ -62,12 +65,19 @@ export default function RegisterPage(){
                 setConfirmPassword('')
                 router.push('/login')
             }else{
-                setError('An error occured')
+                await clearErrorMsg('An error occured, try again later', setError)
+                throw new Error('An error occured, try again later')
             }
 
         } catch (error) {
             throw new Error(error)
         }
+    }
+
+    async function clearErrorMsg(error, setError){
+        setError(error)
+        await new Promise(resolve => setTimeout(resolve, 5000))
+        setError('')
     }
 
     return(
