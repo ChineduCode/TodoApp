@@ -16,6 +16,9 @@ const todoSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     }
+},
+{
+    timestamps : true
 })
 
 const Todo = mongoose.models.Todo || mongoose.model('Todo', todoSchema)
