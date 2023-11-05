@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { NextResponse } from "next/server"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
+
 
 export default function LoginPage(){
     let [username, setUsername] = useState('')
@@ -11,10 +11,11 @@ export default function LoginPage(){
     let [passwordType, setPasswordType] = useState('password')
     let [passwordVisible, setPasswordVisible] = useState(false)
 
+    const router = useRouter()
     
     function passwordVisibility(){
         setPasswordVisible(passwordVisible = !passwordVisible)
-        console.log(passwordVisible)
+
         if(passwordVisible){
             setPasswordType('text')
         }else{
@@ -23,11 +24,12 @@ export default function LoginPage(){
     } 
     
     //Handling Login
-    async function handleLogin(){
-        const router = useRouter()
+    async function handleLogin(e){
+        e.preventDefault()
 
         if(!username || !password){
-            return NextResponse.error('Please fill all fields')
+            console.log('Please fill all fields')
+            return
         }
 
         const res  = await fetch('/api/login', {
@@ -40,10 +42,10 @@ export default function LoginPage(){
         })
 
         if(res.ok){
-            router.push('todo')
+            router.push('/todo')
             return new Response('Login successful', {status: 200})
         }else{
-            return new Response('Login Error, Please try re-checking all crendentials', {status : 400})
+            return new Response('Login Error, Invalid crendentials', {status : 400})
         }
     }
 
