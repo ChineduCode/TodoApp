@@ -10,6 +10,7 @@ export default function LoginPage(){
     let [password, setPassword] = useState('')
     let [passwordType, setPasswordType] = useState('password')
     let [passwordVisible, setPasswordVisible] = useState(false)
+    let [error, setError] = useState(null)
 
     const router = useRouter()
     
@@ -28,7 +29,7 @@ export default function LoginPage(){
         e.preventDefault()
 
         if(!username || !password){
-            console.log('Please fill all fields')
+            setError('Please fill all fields')
             return
         }
 
@@ -47,14 +48,17 @@ export default function LoginPage(){
             router.push('/todo')
             return new Response('Login successful', {status: 200})
         }else{
-            return new Response('Login Error, Invalid crendentials', {status : 400})
+            return new Response(setError('Login Error, Invalid crendentials'), {status : 400})
         }
     }
+
+    function clearErrorMsg(){}
 
     return(
         <main className="login">
             <form className="container" onSubmit={handleLogin}>
                 <h2 className="heading">Log In</h2>
+                <div className="error">{error}</div>
                 <div className="form-control">
                     <label htmlFor="username">Username:</label>
                     <input
