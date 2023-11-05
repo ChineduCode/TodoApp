@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from "react"
+import Link from "next/link"
 
 export default function RegisterPage(){
     let [username, setUsername] = useState('')
@@ -65,6 +66,11 @@ export default function RegisterPage(){
                 </div>
 
                 <button type="submit">Register</button>
+
+                <div className="login-link">
+                    Have an account already? 
+                    &nbsp;<Link href={'/login'}>Login</Link>
+                </div>
             </form>
         </main>
     )

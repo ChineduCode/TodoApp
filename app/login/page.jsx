@@ -1,6 +1,9 @@
 'use client'
 
 import { useState } from "react"
+import Link from "next/link"
+import { NextResponse } from "next/server"
+import { useRouter } from "next/router"
 
 export default function LoginPage(){
     let [username, setUsername] = useState('')
@@ -8,6 +11,7 @@ export default function LoginPage(){
     let [passwordType, setPasswordType] = useState('password')
     let [passwordVisible, setPasswordVisible] = useState(false)
 
+    
     function passwordVisibility(){
         setPasswordVisible(passwordVisible = !passwordVisible)
         console.log(passwordVisible)
@@ -16,11 +20,36 @@ export default function LoginPage(){
         }else{
             setPasswordType('password')
         }
+    } 
+    
+    //Handling Login
+    async function handleLogin(){
+        const router = useRouter()
+
+        if(!username || !password){
+            return NextResponse.error('Please fill all fields')
+        }
+
+        const res  = await fetch('/api/login', {
+            headers : {'Content-Type' : 'Application.json'},
+            method: 'POST',
+            body: JSON.stringify({
+                username,
+                password
+            })
+        })
+
+        if(res.ok){
+            router.push('todo')
+            return new Response('Login successful', {status: 200})
+        }else{
+            return new Response('Login Error, Please try re-checking all crendentials', {status : 400})
+        }
     }
 
     return(
         <main className="login">
-            <form className="container">
+            <form className="container" onSubmit={handleLogin}>
                 <h2 className="heading">Log In</h2>
                 <div className="form-control">
                     <label htmlFor="username">Username:</label>
@@ -52,6 +81,11 @@ export default function LoginPage(){
                 </div>
 
                 <button type="submit">Log In</button>
+
+                <div className="register-link">
+                    Don't have an account? 
+                    &nbsp;<Link href={'/register'}>Register</Link>
+                </div>
             </form>
         </main>
     )

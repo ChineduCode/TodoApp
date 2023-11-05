@@ -70,6 +70,9 @@ input {
   margin: 10px 0;
   color: hsl(235, 19%, 35%);
 }
+.welcome div.register-link, .welcome div.login-link, .register div.register-link, .register div.login-link, .login div.register-link, .login div.login-link {
+  margin-top: 20px;
+}
 
 main.todo {
   width: 100%;
