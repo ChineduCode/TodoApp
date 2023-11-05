@@ -14,6 +14,7 @@ export default function LoginPage(){
 
     const router = useRouter()
     
+    //show and hide password
     function passwordVisibility(){
         setPasswordVisible(passwordVisible = !passwordVisible)
 

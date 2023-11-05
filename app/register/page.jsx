@@ -9,7 +9,9 @@ export default function RegisterPage(){
     let [confirmPassword, setConfirmPassword] = useState('')
     let [passwordType, setPasswordType] = useState('password')
     let [passwordVisible, setPasswordVisible] = useState(false)
-
+    let [error, setError] = useState(null)
+    
+    //Show and Hide password
     function passwordVisibility(){
         setPasswordVisible(passwordVisible = !passwordVisible)
         console.log(passwordVisible)
@@ -20,10 +22,24 @@ export default function RegisterPage(){
         }
     }
 
+    //Check for the validity of the credential added
+    if(!username || !password || confirmPassword){
+        setError('Please fill in all fields')
+        return
+    }
+    if(password.length < 8){
+        setError('Password must contain more than eight characters')
+        return
+    }
+    if(password === confirmPassword){
+        setError('Passwords do not match')
+    }
+
     return(
         <main className="register">
             <form className="container">
                 <h2 className="heading">Register</h2>
+                <div className="err">{error}</div>
                 <div className="form-control">
                     <label htmlFor="username">Username:</label>
                     <input 
