@@ -42,6 +42,8 @@ export default function LoginPage(){
         })
 
         if(res.ok){
+            setUsername('')
+            setPassword('')
             router.push('/todo')
             return new Response('Login successful', {status: 200})
         }else{
