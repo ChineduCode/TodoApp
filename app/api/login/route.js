@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs"
 
 export async function POST(request){
     const res = await request.json()
-    const {username, password} = res
+    let {username, password} = res
 
     if(!username || !password){
         return new Response('Please fill all fields', {status : 401})
@@ -14,6 +14,9 @@ export async function POST(request){
     try {
         //connect to database
         await connectDatabase()
+
+        //transform username to lowercase
+        username = username.toLowerCase()
 
         const user = await User.findOne({username})
 

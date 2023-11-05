@@ -70,7 +70,7 @@ export default function LoginPage(){
                         type="text" 
                         name="username"
                         value={username}
-                        onChange={(e)=> setUsername(e.target.value)} 
+                        onChange={(e)=> setUsername(e.target.value.trim())} 
                     />
                 </div>
                 <div className="form-control">

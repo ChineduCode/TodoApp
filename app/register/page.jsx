@@ -47,8 +47,8 @@ export default function RegisterPage(){
             return
         }
 
-        //Post to the api/register
         try { 
+            //Post to the api/register
             const res = await fetch('/api/register', {
                 headers : {'Content-Type' : 'Application.json'},
                 method: 'POST',
@@ -91,7 +91,7 @@ export default function RegisterPage(){
                         type="text" 
                         name="username"
                         value={username}
-                        onChange={(e)=> setUsername(e.target.value)}
+                        onChange={(e)=> setUsername(e.target.value.trim())}
                         required
                     />
                 </div>

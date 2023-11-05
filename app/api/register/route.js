@@ -4,7 +4,7 @@ import bcrypt from 'bcryptjs'
 
 export async function POST(request){
     const res = await request.json()
-    const {username, password, confirmPassword} = res
+    let {username, password, confirmPassword} = res
 
     //Check for possible errors
     if(!username || !password || !confirmPassword){
@@ -22,6 +22,9 @@ export async function POST(request){
     try {
         //connect to database
         await connectDatabase()
+        
+        //transform username to lowercase
+        username = username.toLowerCase()
 
         //Check if user already exists
         const userExist = await User.findOne({username})
@@ -32,6 +35,7 @@ export async function POST(request){
         //hashPassword
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
+
 
         //Register user
         const user = await User.create({
