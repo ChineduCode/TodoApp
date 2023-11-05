@@ -33,7 +33,7 @@ const todoSchema = new mongoose.Schema({
 })
 
 //User and Todo models
-const User = mongoose.model('User', userSchema)
-const Todo = mongoose.model('Todo', todoSchema)
+const User = mongoose.models.User || mongoose.model('User', userSchema)
+const Todo = mongoose.models.Todo || mongoose.model('Todo', todoSchema)
 
 export {User, Todo}

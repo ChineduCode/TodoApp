@@ -73,6 +73,9 @@ input {
 .welcome div.register-link, .welcome div.login-link, .register div.register-link, .register div.login-link, .login div.register-link, .login div.login-link {
   margin-top: 20px;
 }
+.welcome .error, .register .error, .login .error {
+  color: orangered;
+}
 
 main.todo {
   width: 100%;

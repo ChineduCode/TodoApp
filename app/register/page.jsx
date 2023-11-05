@@ -1,7 +1,8 @@
 'use client'
 
-import { useState, useRef } from "react"
+import { useState} from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 export default function RegisterPage(){
     let [username, setUsername] = useState('')
@@ -10,6 +11,8 @@ export default function RegisterPage(){
     let [passwordType, setPasswordType] = useState('password')
     let [passwordVisible, setPasswordVisible] = useState(false)
     let [error, setError] = useState(null)
+
+    const router = useRouter()
     
     //Show and Hide password
     function passwordVisibility(){
@@ -22,24 +25,56 @@ export default function RegisterPage(){
         }
     }
 
-    //Check for the validity of the credential added
-    if(!username || !password || confirmPassword){
-        setError('Please fill in all fields')
-        return
-    }
-    if(password.length < 8){
-        setError('Password must contain more than eight characters')
-        return
-    }
-    if(password === confirmPassword){
-        setError('Passwords do not match')
+    
+    //Handle Registration
+    async function handleRegistration(e){
+        e.preventDefault()
+        
+        //Check for the validity of the credential added
+        if(!username || !password || !confirmPassword){
+            setError('Please fill in all fields')
+            return
+        }
+        if(password.length < 8){
+            setError('Password must contain more than eight characters')
+            return
+        }
+        if(password !== confirmPassword){
+            setError('Passwords do not match')
+            return
+        }
+
+        //Post to the api/register
+        try { 
+            const res = await fetch('/api/register', {
+                headers : {'Content-Type' : 'Application.json'},
+                method: 'POST',
+                body: JSON.stringify({
+                    username,
+                    password,
+                    confirmPassword
+                })
+            })
+
+            if(res.ok){
+                setUsername('')
+                setPassword('')
+                setConfirmPassword('')
+                router.push('/login')
+            }else{
+                setError('An error occured')
+            }
+
+        } catch (error) {
+            throw new Error(error)
+        }
     }
 
     return(
         <main className="register">
-            <form className="container">
+            <form className="container" onSubmit={handleRegistration}>
                 <h2 className="heading">Register</h2>
-                <div className="err">{error}</div>
+                <div className="error">{error}</div>
                 <div className="form-control">
                     <label htmlFor="username">Username:</label>
                     <input 
