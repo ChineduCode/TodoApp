@@ -83,10 +83,6 @@ input {
   color: orangered;
 }
 
-.next-auth-login-btn {
-  color: blue;
-}
-
 main.todo {
   width: 100%;
   background-image: url("../public/bg-mobile-light.jpg");

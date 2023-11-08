@@ -4,7 +4,7 @@ export default function WelcomePage(){
 
     return(
         <main className="welcome">
-            {/* <section className="container">
+            <section className="container">
                 <h2 className="welcome heading">Welcome</h2>
                 <div className="description">Track Your Day-to-Day Activities with Our Amazing Platform</div>
 
@@ -23,7 +23,7 @@ export default function WelcomePage(){
                         Login
                     </Link>
                 </div>
-            </section> */}
+            </section>
         </main>
     )
 }
