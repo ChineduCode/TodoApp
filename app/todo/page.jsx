@@ -4,9 +4,11 @@ import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "@/components/Todo"
 import { useState, useEffect } from "react"
+import { signIn, signOut, useSession } from "next-auth/react"
 
 export default function TodoApp(){
     let [todos, setTodos] = useState([])
+    const {data: session} = useSession()
     
     //Load todo from localStorage when the component mount
     useEffect(() => {
@@ -61,10 +63,19 @@ export default function TodoApp(){
     
     //filter and get the length of todo.completed === false 
     const notCompleted = todos.filter(todo => !todo.completed)
+
+    if(!session && !session.user){
+        return(
+            <div className={'next-auth-login-btn'}>
+                <button onClick={()=> signIn()}>login</button>
+            </div>
+        )
+    }
     
     return(
         <main className="todo">
             <section className="container">
+                <button onClick={()=> signOut()}></button>
                 <Header />
                 <CreateNewTodo addNewTodo={addNewTodo} />
                 {todos.length > 0 ? 
