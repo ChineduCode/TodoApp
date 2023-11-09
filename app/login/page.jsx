@@ -3,6 +3,7 @@
 import { useState } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { signIn } from "next-auth/react"
 
 export default function LoginPage(){
     let [username, setUsername] = useState('')
@@ -33,23 +34,33 @@ export default function LoginPage(){
             return
         }
 
-        const res  = await fetch('/api/login', {
-            headers : {'Content-Type' : 'application/json'},
-            method: 'POST',
-            body: JSON.stringify({
-                username,
-                password
-            })
-        })
+        // const res  = await fetch('/api/login', {
+        //     headers : {'Content-Type' : 'application/json'},
+        //     method: 'POST',
+        //     body: JSON.stringify({
+        //         username,
+        //         password
+        //     })
+        // })
 
-        if(res.ok){
-            setUsername('')
-            setPassword('')
-            router.push('/todo')
-            return new Response('Login successful', {status: 200})
-        }else{
-            await clearErrorMsg('Invalid credentials', setError)
-            return new Response('Login Error, Invalid crendentials', {status : 400})
+        // if(res.ok){
+        //     setUsername('')
+        //     setPassword('')
+        //     router.push('/todo')
+        //     return new Response('Login successful', {status: 200})
+        // }else{
+        //     await clearErrorMsg('Invalid credentials', setError)
+        //     return new Response('Login Error, Invalid crendentials', {status : 400})
+        // }
+
+        const result = await signIn('credentials', {
+            username,
+            password,
+            redirect: false, // Prevent auto-redirect after login
+        });
+
+        if (!result.error) {
+            window.location.href = '/dashboard';
         }
     }
 

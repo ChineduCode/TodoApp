@@ -4,7 +4,7 @@ import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "@/components/Todo"
 import { useState, useEffect } from "react"
-import { signIn, signOut, useSession } from "next-auth/react"
+import { getSession, useSession } from "next-auth/react"
 
 export default function TodoApp(){
     let [todos, setTodos] = useState([])
@@ -62,6 +62,12 @@ export default function TodoApp(){
     
     //filter and get the length of todo.completed === false 
     const notCompleted = todos.filter(todo => !todo.completed)
+
+    const { data: session } = useSession();
+
+    if (!session) {
+        return <div>You are not authenticated. Please sign in.</div>;
+    }
     
     return(
         <main className="todo">
