@@ -62,9 +62,10 @@ export default function LoginPage(){
         if (result) {
             setUsername('')
             setPassword('')
-            window.location.href = '/todo';
+            router.push('/todo')
 
         }else{
+            //console.log(result.error)
             throw new Error('Invalid credentials')
         }
     }

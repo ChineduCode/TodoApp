@@ -31,16 +31,16 @@ const handler =  NextAuth({
             
                     //check if user does not exist
                     if(!user){
-                        console.log('User does not exist')
-                        return new Response(`User does not exist`, {status : 401})
+                        throw new Error('User does not exist')
                     }
             
                     //check if password is correct
                     const validPassword = await bcrypt.compare(password, user.password)
                     if(!validPassword){
-                        console.log('Incorrect password')
-                        return new Response('Incorrect password', {status : 401})
+                        throw new Error('Incorrect password')
                     }
+
+                    console.log(user)
             
                     return NextResponse.json(user)
             

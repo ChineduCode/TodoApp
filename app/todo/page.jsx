@@ -8,11 +8,6 @@ import { useSession } from "next-auth/react"
 
 export default function TodoApp(){
     const { data: session } = useSession();
-    
-    if (!session) {
-        return <div>You are not authenticated. Please sign in.</div>;
-    }
-
     let [todos, setTodos] = useState([])
     
     //Load todo from localStorage when the component mount
@@ -27,7 +22,8 @@ export default function TodoApp(){
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos))
     }, [todos])
-    
+
+
     
     function addNewTodo(todo){
         const existingTodo = todos.find(td => td.text.toLowerCase() === todo.text.toLowerCase())
@@ -40,7 +36,7 @@ export default function TodoApp(){
 
     function handleCompleted(id){
         setTodos(
-            todos.map(todo => 
+            todos.map(todo =>
                 todo.text.toLowerCase() === id.toLowerCase() ? {...todo, completed : true} : todo
                 )
                 )
@@ -68,9 +64,11 @@ export default function TodoApp(){
     
     //filter and get the length of todo.completed === false 
     const notCompleted = todos.filter(todo => !todo.completed)
-
-
-   
+    
+    if (!session) {
+        return <div>You are not authenticated. Please sign in.</div>; 
+    }
+    
     return( 
         <main className="todo">
             <section className="container">
