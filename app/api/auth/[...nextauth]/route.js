@@ -2,6 +2,7 @@ import NextAuth from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import User from '@/Models/User';
 import connectDatabase from '@/connectDB';
+import bcrypt from 'bcryptjs'
 import { NextResponse } from 'next/server';
 
 const handler =  NextAuth({
@@ -44,15 +45,15 @@ const handler =  NextAuth({
                     return NextResponse.json(user)
             
                 } catch (error) {
-                    console.error(error)
+                    console.log(error)
                 }
             },
         }),   
     ],
 
-    // pages: {
-    //     signIn: '/login',
-    // },
+    pages: {
+        signIn: '/login',
+    },
 
     // callbacks: {
     //     async jwt(token, user) {

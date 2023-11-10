@@ -59,8 +59,13 @@ export default function LoginPage(){
             redirect: false, // Prevent auto-redirect after login
         });
 
-        if (!result.error) {
-            window.location.href = '/dashboard';
+        if (result) {
+            setUsername('')
+            setPassword('')
+            window.location.href = '/todo';
+
+        }else{
+            throw new Error('Invalid credentials')
         }
     }
 
