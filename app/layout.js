@@ -5,7 +5,7 @@ const josefin_sans = Josefin_Sans({ subsets: ['latin'] })
 
 export const metadata = {
   title: 'TODO APP',
-  description: 'Todo App',
+  description: 'Track your day to day activities with our platform',
 }
 
 export default function RootLayout({ children }) {

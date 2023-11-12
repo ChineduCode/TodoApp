@@ -1,13 +1,15 @@
 'use client'
 
+import Link from 'next/link'
 import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "@/components/Todo"
 import { useState, useEffect } from "react"
-import { useSession } from "next-auth/react"
+import { useSession } from 'next-auth/react'
 
-export default function TodoApp(){
-    const { data: session } = useSession();
+export default function WelcomePage(){
+    const {data: session} = useSession()
+
     let [todos, setTodos] = useState([])
     
     //Load todo from localStorage when the component mount
@@ -22,7 +24,6 @@ export default function TodoApp(){
     useEffect(() => {
         localStorage.setItem('todos', JSON.stringify(todos))
     }, [todos])
-
 
     
     function addNewTodo(todo){
@@ -64,11 +65,33 @@ export default function TodoApp(){
     
     //filter and get the length of todo.completed === false 
     const notCompleted = todos.filter(todo => !todo.completed)
+
+    if(!session || !session.user){
+        return(
+            <main className="welcome">
+                <section className="container">
+                    <h2 className="welcome heading">Welcome</h2>
+                    <div className="description">Track Your Day-to-Day Activities with Our Amazing Platform</div>
     
-    if (!session) {
-        return <div>You are not authenticated. Please sign in.</div>; 
+                    <div className="register-and-login-link">
+                        <Link 
+                            href={`/register`}
+                            className='register-link'
+                        >
+                            Register
+                        </Link>
+    
+                        <Link 
+                            href={`/login`}
+                            className='login-link'
+                        >   
+                            Login
+                        </Link>
+                    </div>
+                </section>
+            </main>
+        ) 
     }
-    
 
     return( 
         <main className="todo">
@@ -90,7 +113,7 @@ export default function TodoApp(){
                             </div>
                             <span className="clear_completed" onClick={deleteAllCompleted}>Clear Completed</span>
                         </div>
-                   </section>  :  <span className="add_new_todo_text">Add Todo</span> 
+                   </section>  :  <span className="add_new_todo_text">Add Todo </span> 
                 }
             </section>
         </main>
