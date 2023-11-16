@@ -3,7 +3,6 @@ import Credentials from 'next-auth/providers/credentials';
 import User from '@/Models/User';
 import connectDatabase from '@/connectDB';
 import bcrypt from 'bcryptjs'
-import { NextResponse } from 'next/server';
 
 const handler =  NextAuth({
     providers: [ 
@@ -18,14 +17,14 @@ const handler =  NextAuth({
             async authorize (credentials, req) {
                 if(!credentials?.username || !credentials?.password) return null
 
-                const { username, password } = credentials
+                let { username, password } = credentials
 
                 try {
                     //connect to database
                     await connectDatabase()
             
                     //transform username to lowercase
-                    //username = username.toLowerCase()
+                    username = username.toLowerCase()
             
                     const user = await User.findOne({username})
             
@@ -55,12 +54,12 @@ const handler =  NextAuth({
         signIn: '/login',
     },
 
-    callbacks: {
-        async session(session, user) {
-          session.userId = user.id; // Add user id to the session
-          return session;
-        },
-    },
+    // callbacks: {
+    //     async session(session, user) {
+    //       session.userId = user.id; // Add user id to the session
+    //       return session;
+    //     },
+    // },
 })
 
 export {handler as GET, handler as POST}
