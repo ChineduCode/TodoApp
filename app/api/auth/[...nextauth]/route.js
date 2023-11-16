@@ -42,7 +42,7 @@ const handler =  NextAuth({
 
                     console.log(user)
             
-                    return NextResponse.json(user)
+                    return user;
             
                 } catch (error) {
                     console.log(error)
@@ -55,22 +55,12 @@ const handler =  NextAuth({
         signIn: '/login',
     },
 
-    // callbacks: {
-    //     async jwt(token, user) {
-    //         if (user) {
-    //             token.id = user._id;
-    //         }
-    //         return token;
-    //     },
-    //     async session(session, token) {
-    //         session.user.id = token.id;
-    //         return session;
-    //     },
-    // },
-
-    // session: {
-    //     jwt: true
-    // }
+    callbacks: {
+        async session(session, user) {
+          session.userId = user.id; // Add user id to the session
+          return session;
+        },
+    },
 })
 
 export {handler as GET, handler as POST}
