@@ -55,7 +55,7 @@ const handler =  NextAuth({
                     }
 
                     if(username != user.name){
-                        throw new Error('User dont exist')
+                        throw new Error('User does not exist')
                     }
                     if(password != user.password){
                         throw new Error('Password do not match')
@@ -64,7 +64,7 @@ const handler =  NextAuth({
                     return user
 
                 } catch (error) {
-                    console.log(error)
+                    console.error(error.message)
                 }
             },
         }),   

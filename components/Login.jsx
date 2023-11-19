@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { signIn } from "next-auth/react"
 
-export default function Login({callbackUrl}){
+export default function Login(){
     let [username, setUsername] = useState('')
     let [password, setPassword] = useState('')
     let [passwordType, setPasswordType] = useState('password')
@@ -13,7 +13,7 @@ export default function Login({callbackUrl}){
     let [error, setError] = useState(null)
 
     const router = useRouter()
-    
+ 
     //show and hide password
     function passwordVisibility(){
         setPasswordVisible(passwordVisible = !passwordVisible)
@@ -45,8 +45,8 @@ export default function Login({callbackUrl}){
             setPassword('')
             router.push('/todo')
         }else{
-            
-            throw new Error('Invalid credentials')
+            await clearErrorMsg('Invalid credentials', setError)
+            return new Response(error, {status: 401})
         }
     }
 
