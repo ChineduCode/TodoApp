@@ -37,16 +37,15 @@ export default function Login({callbackUrl}){
         const res = await signIn('credentials', {
             username,
             password,
-            redirect: true,
-            callbackUrl: callbackUrl ?? process.env.API_URL
+            redirect: false,
         });
 
         if (res.ok) {
             setUsername('')
             setPassword('')
-
+            router.push('/todo')
         }else{
-            //console.log(result.error)
+            
             throw new Error('Invalid credentials')
         }
     }
