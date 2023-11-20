@@ -38,7 +38,7 @@ export default function Register(){
         }
         if(password.length < 8){
             //setError('Password must contain more than eight characters')
-            await clearErrorMsg('Password must contain more than eight characters', setError)
+            await clearErrorMsg('Password must contain minimum eight characters', setError)
             return
         }
         if(password !== confirmPassword){
