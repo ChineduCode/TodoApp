@@ -1,4 +1,4 @@
-export default function Todos({todo, onComplete, onDelete}){
+export default function Todo({todo, onComplete, onDelete}){
     return(
         <div className="todo">
             <div className={`left ${todo.completed ? 'completed' : 'left'}`}>
