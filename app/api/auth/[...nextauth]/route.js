@@ -44,26 +44,6 @@ const handler =  NextAuth({
                 } catch (error) {
                     console.log(error.message)
                 }
-
-                // try {
-                //     const user = {
-                //         name: 'chineducode',
-                //         password: '12345678',
-                //         email: 'chinedu@gmail.com'
-                //     }
-
-                //     if(username != user.name){
-                //         throw new Error('User does not exist')
-                //     }
-                //     if(password != user.password){
-                //         throw new Error('Password do not match')
-                //     }
-
-                //     return user
-
-                // } catch (error) {
-                //     console.error(error.message)
-                // }
             },
         }),   
     ],
