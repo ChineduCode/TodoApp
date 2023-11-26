@@ -14,12 +14,12 @@ const handler =  NextAuth({
                 password: { label: 'Password', type: 'password' },
             },
 
-            async authorize (credentials, req) {
+            async authorize (credentials) {
                 if(!credentials?.username || !credentials?.password) return null
 
                 let { username, password } = credentials
-
-                try {
+ 
+                try { 
                     //connect to database
                     await connectDatabase()
             
