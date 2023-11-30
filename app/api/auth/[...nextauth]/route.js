@@ -4,7 +4,7 @@ import User from '@/Models/User';
 import connectDatabase from '@/connectDB';
 import bcrypt from 'bcryptjs'
 
-const handler =  NextAuth({
+export const authOptions = {
     providers: [ 
         Credentials({
             name: 'Credentials',
@@ -54,15 +54,35 @@ const handler =  NextAuth({
 
     callbacks: {
         async jwt({ token, user, session }) {
-            return { ...token, ...user, ...session }
+            console.log('jwt callback ', { token, user, session })
+
+            if(user){
+                return {
+                    ...token,
+                    id: user.id,
+                    username: user.username
+                }
+            }
+            return token
         },
 
         async session({ session, token, user }){
-            console.log({session, token, user})
-            session.user = token
+            console.log('session callback', {session, token, user})
+            
+            return {
+                ...session,
+                user: {
+                    ...session.user,
+                    id: token.id,
+                    username: token.username
+                }
+            }
+            
             return session
         }
     }
-})
+}
+
+const handler = NextAuth(authOptions)
 
 export {handler as GET, handler as POST}

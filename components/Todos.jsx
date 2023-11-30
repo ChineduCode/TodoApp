@@ -4,9 +4,11 @@ import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "./Todo"
 import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
 
 export default function Todos(){
     let [todos, setTodos] = useState([])
+    const { data: session } = useSession()
     
     //Load todo from localStorage when the component mount
     useEffect(() => {
@@ -66,6 +68,7 @@ export default function Todos(){
         <main className="todo">
             <section className="container">
                 <Header />
+                //<span>{session?.user.username}</span>
                 <CreateNewTodo addNewTodo={addNewTodo} />
                 {todos.length > 0 ? 
                     <section className="todos_container">
