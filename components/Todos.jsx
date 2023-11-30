@@ -68,7 +68,7 @@ export default function Todos(){
         <main className="todo">
             <section className="container">
                 <Header />
-                //<span>{session?.user.username}</span>
+                {/* <span>{session?.user.username}</span> */}
                 <CreateNewTodo addNewTodo={addNewTodo} />
                 {todos.length > 0 ? 
                     <section className="todos_container">
