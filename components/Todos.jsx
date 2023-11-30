@@ -35,9 +35,9 @@ export default function Todos(){
         setTodos(
             todos.map(todo =>
                 todo.text.toLowerCase() === id.toLowerCase() ? {...todo, completed : true} : todo
-                )
-                )
-            }
+            )
+        )
+    }
 
     function handleDelete(id){
         setTodos(todos.filter(todo => todo.text.toLowerCase() !== id.toLowerCase()))
