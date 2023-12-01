@@ -27,12 +27,12 @@ export async function POST(request){
         )
     }
 
-    const todo = await Todo.create({
-        text,
-        user: session.user.id
-    })
-
-    return NextResponse.json(todo)
+    // const todo = await Todo.create({
+    //     text,
+    //     user: session.user.id
+    // })
+    console.log(text)
+    return NextResponse.json({text})
 }
 
 

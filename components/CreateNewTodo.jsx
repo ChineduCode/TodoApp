@@ -2,7 +2,7 @@
 
 import { useState } from "react"
 
-export default function CreateNewTodo({addNewTodo}){
+export default function CreateNewTodo(){
     const [text, setText] = useState('')
 
     async function handleSubmit(e){
@@ -17,7 +17,7 @@ export default function CreateNewTodo({addNewTodo}){
             const res = await fetch('/api/todo', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
-                body: { text }
+                body: JSON.stringify({text})
             })
 
             if(res.ok){
