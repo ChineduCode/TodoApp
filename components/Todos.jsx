@@ -11,7 +11,7 @@ export default function Todos(){
     //Fetch todo
     useEffect(() => {
         const getTodos = async ()=> {
-            const res = await fetch('/api/todo')
+            const res = await fetch('/api/todo', { next: { revalidate: 10 } })
             const data = await res.json()
             setTodos(data)
         }
