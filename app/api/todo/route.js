@@ -21,7 +21,7 @@ export async function POST(request){
     const { text } = res
     if(!text){
         return new Response(
-            JSON.stringify({msg: 'Fill all fields'}), 
+            JSON.stringify({msg: 'Fill all fields'}),
             {status: 400}
         )
     }
@@ -33,6 +33,8 @@ export async function POST(request){
         text,
         user: session.user.id
     })
+
+    console.log(todo)
 
     return NextResponse.json(todo)
 }
@@ -58,18 +60,18 @@ export async function GET(){
 }
 
 
-//DELETE TODO
-export async function DELETE(request){
-    const session = await getServerSession(authOptions)
-    //CHECK IF USER IS AUTHORIZED
-    if(!session || !session.user){
-        return new Response(
-            JSON.stringify({msg: 'Unauthorized'}), 
-            {status: 401}
-        )
-    }
+// //DELETE TODO
+// export async function DELETE(){
+//     const session = await getServerSession(authOptions)
+//     //CHECK IF USER IS AUTHORIZED
+//     if(!session || !session.user){
+//         return new Response(
+//             JSON.stringify({msg: 'Unauthorized'}), 
+//             {status: 401}
+//         )
+//     }
 
     
-    //DELETE IF AUTHORIZED
-    return NextResponse.json({msg: 'Todo deleted'})
-}
+//     //DELETE IF AUTHORIZED
+//     return NextResponse.json({msg: 'Todo deleted'})
+// }

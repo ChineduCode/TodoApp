@@ -18,15 +18,7 @@ export default function Todos(){
 
         getTodos()
     }, []) 
-
-    function addNewTodo(todo){
-        const existingTodo = todos.find(td => td.text.toLowerCase() === todo.text.toLowerCase())
-        if(existingTodo){
-            alert('Todo already existed')
-            return
-        }
-        setTodos([todo, ...todos])
-    }
+    console.log(todos)
 
     function handleCompleted(id){
         setTodos(
@@ -63,7 +55,7 @@ export default function Todos(){
         <main className="todo">
             <section className="container">
                 <Header />
-                <CreateNewTodo addNewTodo={addNewTodo} />
+                <CreateNewTodo />
                 {todos.length > 0 ? 
                     <section className="todos_container">
                         <div className="todos">
