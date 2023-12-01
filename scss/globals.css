@@ -105,6 +105,7 @@ main.todo header .sun-icon {
 }
 main.todo form {
   margin-top: 3rem;
+  box-shadow: 0 0 15px hsl(235, 19%, 35%);
 }
 main.todo .todos_container {
   margin: 2rem 0;
@@ -112,7 +113,7 @@ main.todo .todos_container {
   color: hsl(235, 19%, 35%);
   border-radius: 7px;
   font-size: 15px;
-  box-shadow: 0 0 15px hsl(235, 19%, 35%);
+  box-shadow: 0 0 10px hsl(235, 19%, 35%);
 }
 main.todo .todos_container .todo {
   padding: 18px 20px;
