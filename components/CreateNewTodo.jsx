@@ -5,7 +5,7 @@ import { useState } from "react"
 export default function CreateNewTodo({addNewTodo}){
     const [text, setText] = useState('')
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault()
 
         if(!text){
@@ -13,17 +13,21 @@ export default function CreateNewTodo({addNewTodo}){
             return
         }
 
-        // let reminder = false
-        // const id = Math.floor(Math.random() * 100 * 0.1)
+        try{
+            const res = await fetch('/api/todo', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: { text }
+            })
 
-        const todo = {
-            text
+            if(res.ok){
+                setText('')
+            }
+
+        }catch (error) {
+            console.log(error)
+            throw new Error(error)
         }
-
-        addNewTodo(todo)
-
-        //clear text
-        setText('')
     }
 
     return(
