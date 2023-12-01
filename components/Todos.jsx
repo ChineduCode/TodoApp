@@ -4,6 +4,7 @@ import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "./Todo"
 import { useState, useEffect } from "react"
+import { useRouter } from "next/navigation"
 
 export default function Todos(){
     let [todos, setTodos] = useState([])
