@@ -3,34 +3,53 @@
 import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import Todo from "./Todo"
-import { useState, useEffect } from "react"
-import { useRouter } from "next/navigation"
+import { useState, useEffect } from "react" 
+import { useRouter } from 'next/navigation'
 
 export default function Todos(){
     let [todos, setTodos] = useState([])
+    const router = useRouter()
     
     //Fetch todo
     useEffect(() => {
         const getTodos = async ()=> {
-            const res = await fetch('/api/todo', { next: { revalidate: 10 } })
+            const res = await fetch('/api/todo', { cache: 'no-store'})
             const data = await res.json()
             setTodos(data)
+
+            router.refresh()
         }
 
         getTodos()
-    }, []) 
-    console.log(todos)
+    }, [])
 
-    function handleCompleted(id){
-        setTodos(
-            todos.map(todo =>
-                todo.text.toLowerCase() === id.toLowerCase() ? {...todo, completed : true} : todo
-            )
-        )
+    async function handleCompleted(id){
+        const res = await fetch(`/api/todo?id=${id}`, {
+            method: 'PUT'
+        })
+
+        if(res.ok){
+            console.log(`todo deleted`)
+            router.refresh()
+            router.push('/todo')
+        }else {
+            throw new Error('error deleting todo')
+        }
     }
 
-    function handleDelete(id){
-        setTodos(todos.filter(todo => todo.text.toLowerCase() !== id.toLowerCase()))
+    async function handleDelete(id){
+        console.log(id)
+        const res = await fetch(`/api/todo?id=${id}`, {
+            method: 'DELETE'
+        })
+
+        if(res.ok){
+            console.log(`todo deleted`)
+            router.refresh()
+            router.push('/todo')
+        }else {
+            throw new Error('error deleting todo')
+        }
     }
     
     function deleteAllCompleted(){

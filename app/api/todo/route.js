@@ -58,18 +58,63 @@ export async function GET(){
 }
 
 
-// //DELETE TODO
-// export async function DELETE(){
-//     const session = await getServerSession(authOptions)
-//     //CHECK IF USER IS AUTHORIZED
-//     if(!session || !session.user){
-//         return new Response(
-//             JSON.stringify({msg: 'Unauthorized'}), 
-//             {status: 401}
-//         )
-//     }
+//UPDATE TODO
+export async function PUT(request){
+    const session = await getServerSession(authOptions)
+    //CHECK IF USER IS AUTHORIZED
+    if(!session || !session.user){
+        return new Response(
+            JSON.stringify({msg: 'Unauthorized'}), 
+            {status: 401}
+        )
+    }
+
+
+    //UPDATE IF AUTHORIZED
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    //connect to database
+    await connectDatabase()
+
+    const completedTodo = await Todo.findByIdAndUpdate(id, { completed: true }, { new: true })
+
+    if(completedTodo){
+        console.log('todo completed')
+        return NextResponse.json({msg: 'Todo completed'})
+
+    }else{
+        throw new Error('Todo not completed')
+    }
+
+}
+
+
+//DELETE TODO
+export async function DELETE(request){
+    const session = await getServerSession(authOptions)
+    //CHECK IF USER IS AUTHORIZED
+    if(!session || !session.user){
+        return new Response(
+            JSON.stringify({msg: 'Unauthorized'}), 
+            {status: 401}
+        )
+    }
 
     
-//     //DELETE IF AUTHORIZED
-//     return NextResponse.json({msg: 'Todo deleted'})
-// }
+    //DELETE IF AUTHORIZED
+    const { searchParams } = new URL(request.url)
+    const id = searchParams.get('id')
+
+    //connect to database
+    await connectDatabase()
+    
+    const deletedTodo = await Todo.findByIdAndDelete(id)
+    if(deletedTodo){
+        console.log('Todo deleted')
+        return NextResponse.json({msg: 'Todo deleted'})
+
+    }else{
+        throw new Error('Cant delete todo try again later')
+    }
+}
