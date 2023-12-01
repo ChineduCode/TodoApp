@@ -8,20 +8,17 @@ import { useState, useEffect } from "react"
 export default function Todos(){
     let [todos, setTodos] = useState([])
     
-    //Load todo from localStorage when the component mount
+    //Fetch todo
     useEffect(() => {
-        const storedTodos = localStorage.getItem('todos');
-        if(storedTodos){
-            setTodos(JSON.parse(storedTodos))
+        const getTodos = async ()=> {
+            const res = await fetch('/api/todo')
+            const data = await res.json()
+            setTodos(data)
         }
+
+        getTodos()
     }, []) 
 
-    //Update the localStorage whenever the todo changes
-    useEffect(() => {
-        localStorage.setItem('todos', JSON.stringify(todos))
-    }, [todos])
-
-    
     function addNewTodo(todo){
         const existingTodo = todos.find(td => td.text.toLowerCase() === todo.text.toLowerCase())
         if(existingTodo){

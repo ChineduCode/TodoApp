@@ -27,12 +27,22 @@ export async function POST(request){
         )
     }
 
-    // const todo = await Todo.create({
-    //     text,
-    //     user: session.user.id
-    // })
-    console.log(text)
-    return NextResponse.json({text})
+    try {
+        //connect to database
+        await connectDatabase()
+
+        const todo = await Todo.create({
+            text,
+            user: session.user.id
+        })
+
+        console.log({todo})
+        return NextResponse.json({todo})
+
+    } catch (error) {
+        console.log(error)
+    }
+
 }
 
 
@@ -46,12 +56,19 @@ export async function GET(request){
             {status: 401}
         )
     }
+
+    try {
+        //connect to db
+        await connectDatabase()
+
+        //GET TODO IF AUTHORIZED
+        const todos = await Todo.find({ user: session.user.id }, {__v:0})
+        console.log(todos)
+        return NextResponse.json(todos)
+    } catch (error) {
+        console.log(error)
+    }
     
-
-    //GET TODO IF AUTHORIZED
-    const todos = await Todo.find({ user: session.user.id })
-
-    return NextResponse.json(todos)
 }
 
 
