@@ -1,6 +1,5 @@
 import { NextResponse } from 'next/server';
 import Todo from "@/Models/Todo";
-import User from "@/Models/User";
 import connectDatabase from "@/connectDB";
 import { authOptions } from "../auth/[...nextauth]/route";
 import { getServerSession } from "next-auth";
@@ -27,27 +26,20 @@ export async function POST(request){
         )
     }
 
-    try {
-        //connect to database
-        await connectDatabase()
+    //connect to database
+    await connectDatabase()
 
-        const todo = await Todo.create({
-            text,
-            user: session.user.id
-        })
+    const todo = await Todo.create({
+        text,
+        user: session.user.id
+    })
 
-        console.log({todo})
-        return NextResponse.json({todo})
-
-    } catch (error) {
-        console.log(error)
-    }
-
+    return NextResponse.json(todo)
 }
 
 
 //GET TODO
-export async function GET(request){
+export async function GET(){
     const session = await getServerSession(authOptions)
     //CHECK IF USER IS AUTHORIZED
     if(!session || !session.user){
@@ -57,18 +49,12 @@ export async function GET(request){
         )
     }
 
-    try {
-        //connect to db
-        await connectDatabase()
+    //connect to db
+    await connectDatabase()
 
-        //GET TODO IF AUTHORIZED
-        const todos = await Todo.find({ user: session.user.id }, {__v:0})
-        console.log(todos)
-        return NextResponse.json(todos)
-    } catch (error) {
-        console.log(error)
-    }
-    
+    //GET TODO IF AUTHORIZED
+    const todos = await Todo.find({ user: session.user.id }, {__v:0})
+    return NextResponse.json(todos)   
 }
 
 
