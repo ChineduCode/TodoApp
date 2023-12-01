@@ -1,3 +1,4 @@
+import { NextResponse } from 'next/server';
 import Todo from "@/Models/Todo";
 import User from "@/Models/User";
 import connectDatabase from "@/connectDB";
@@ -18,9 +19,20 @@ export async function POST(request){
 
     //CREATE TODO IF AUTHORIZED
     const res = await request.json()
-    console.log(res)
+    const { text } = res
+    if(!text){
+        return new Response(
+            JSON.stringify({msg: 'Fill all fields'}), 
+            {status: 400}
+        )
+    }
 
-    return NextResponse.json({res})
+    const todo = await Todo.create({
+        text,
+        user: session.user.id
+    })
+
+    return NextResponse.json(todo)
 }
 
 
@@ -37,12 +49,9 @@ export async function GET(request){
     
 
     //GET TODO IF AUTHORIZED
-    const todo = {
-        text: 'I will go to america next year',
-        completed: false
-    }
+    const todos = await Todo.find({ user: session.user.id })
 
-    return NextResponse.json(todo)
+    return NextResponse.json(todos)
 }
 
 

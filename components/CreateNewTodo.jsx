@@ -13,13 +13,11 @@ export default function CreateNewTodo({addNewTodo}){
             return
         }
 
-        let reminder = false
-        const id = Math.floor(Math.random() * 100 * 0.1)
+        // let reminder = false
+        // const id = Math.floor(Math.random() * 100 * 0.1)
 
         const todo = {
-            id,
-            text,
-            reminder
+            text
         }
 
         addNewTodo(todo)
