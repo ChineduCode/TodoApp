@@ -34,8 +34,6 @@ export async function POST(request){
         user: session.user.id
     })
 
-    console.log(todo)
-
     return NextResponse.json(todo)
 }
 
