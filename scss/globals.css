@@ -207,23 +207,20 @@ main.todo .add_new_todo_text {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 25%;
 }
 .loading-container .loading-spinner {
-  border: 8px solid #f3f3f3;
-  border-top: 8px solid #1877f2;
+  border: 5px solid #f3f3f3;
+  border-top: 5px solid hsl(192, 100%, 67%);
   border-radius: 50%;
   width: 40px;
   height: 40px;
-  animation: spin 1s linear infinite;
+  animation: spin 0.5s linear infinite;
 }
 .loading-container p {
   margin-top: 16px;
   font-weight: bold;
-  color: #65676b; /* Facebook's gray text color */
+  color: hsl(235, 19%, 35%);
 }
 
 @keyframes spin {

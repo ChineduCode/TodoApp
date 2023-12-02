@@ -224,31 +224,27 @@ main.todo{
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 25%;
 
   .loading-spinner {
-    border: 8px solid #f3f3f3; // Light gray border
-    border-top: 8px solid #1877f2; // Facebook blue border
+    border: 5px solid #f3f3f3; // Light gray border
+    border-top: 5px solid hsl(192, 100%, 67%);
     border-radius: 50%; 
     width: 40px;
     height: 40px;
-    animation: spin 1s linear infinite;
+    animation: spin .5s linear infinite;
   }
 
   p {
     margin-top: 16px;
     font-weight: bold;
-    color: #65676b; /* Facebook's gray text color */
+    color: hsl(235, 19%, 35%);
   }
 }
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 
 
 @media only screen and (min-width : 800px){

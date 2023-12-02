@@ -20,7 +20,7 @@ export default function Todo(){
         }
 
         fetchTodos()
-    })
+    }, [])
 
     async function handleCompleted(id){
         const res = await fetch(`/api/todo?id=${id}`, {
@@ -72,23 +72,28 @@ export default function Todo(){
             <section className="container">
                 <Header />
                 <CreateNewTodo />
-                <Loading />
 
-                <section className="todos_container">
-                    <div className="todos">
-                        { todos.map((todo, index) => <TodoList key={index} todo={todo} handleCompleted={handleCompleted} handleDelete={handleDelete}/> )}
-                    </div>
+                { loading ? 
 
-                    <div className="bottom">
-                        <span className="items_left">{notCompleted.length} items left</span>
-                        <div className="filter">
-                            <span className="all" onClick={getAll}>All</span>
-                            <span className="active" onClick={filterActive}>Active</span>
-                            <span className="completed" onClick={filterCompleted}>Completed</span>
+                    <Loading /> :
+
+                    <section className="todos_container">
+                        <div className="todos">
+                            { todos.map((todo, index) => <TodoList key={index} todo={todo} handleCompleted={handleCompleted} handleDelete={handleDelete}/> )}
                         </div>
-                        <span className="clear_completed" onClick={deleteAllCompleted}>Clear Completed</span>
-                    </div>
-                </section>
+
+                        <div className="bottom">
+                            <span className="items_left">{notCompleted.length} items left</span>
+                            <div className="filter">
+                                <span className="all" onClick={getAll}>All</span>
+                                <span className="active" onClick={filterActive}>Active</span>
+                                <span className="completed" onClick={filterCompleted}>Completed</span>
+                            </div>
+                            <span className="clear_completed" onClick={deleteAllCompleted}>Clear Completed</span>
+                        </div>
+                    </section>
+                }
+
             </section>
         </main>
     )
