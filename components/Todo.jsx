@@ -63,25 +63,23 @@ export default function Todo(){
         console.log('Completed')
     }
 
-    // //filter and get the length of todo.completed === false 
+    //filter and get the length of todo.completed === false 
     // const notCompleted = todos.filter(todo => !todo.completed)
-    const notCompleted = 'notcomplete'
+    const notCompleted = ''
 
-    return( 
+    return(
         <main className="todo">
             <section className="container">
                 <Header />
                 <CreateNewTodo />
 
-                { loading ? 
-
-                    <Loading /> :
+                { loading ? <Loading /> :
 
                     <section className="todos_container">
                         <div className="todos">
                             { todos.map((todo, index) => <TodoList key={index} todo={todo} handleCompleted={handleCompleted} handleDelete={handleDelete}/> )}
                         </div>
-
+                        
                         <div className="bottom">
                             <span className="items_left">{notCompleted.length} items left</span>
                             <div className="filter">
@@ -91,7 +89,7 @@ export default function Todo(){
                             </div>
                             <span className="clear_completed" onClick={deleteAllCompleted}>Clear Completed</span>
                         </div>
-                    </section>
+                    </section> 
                 }
 
             </section>
