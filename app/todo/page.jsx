@@ -1,7 +1,7 @@
-import TodoList from "@/components/TodoList"
+import Todo from "@/components/Todo"
 
 export default async function TodoPage(){
     return(
-        <TodoList />
+        <Todo />
     )
 }

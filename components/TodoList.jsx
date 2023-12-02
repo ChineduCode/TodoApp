@@ -1,15 +1,15 @@
-import Header from "@/components/Header"
-import CreateNewTodo from "@/components/CreateNewTodo"
-import Todo from "./Todo"
+'use client'
 
-export default async function TodoList(){
-    return( 
-        <main className="todo">
-            <section className="container">
-                <Header />
-                <CreateNewTodo />
-                <Todo />
-            </section>
-        </main>
+export default function TodoList({ todo }){
+    return(
+        <div className="todo">
+            <div className={`left ${todo.completed ? 'completed' : 'left'}`}>
+                <span className="checkbox" onClick={() => handleCompleted(todo._id)}>
+                    <img src="./icon-check.svg" alt="check" className="icon-check"/>
+                </span>
+                <span className="text">{todo.text}</span>
+            </div>
+            <img src="./icon-cross.svg" alt="cross" className="icon-cross" onClick={()=> handleDelete(todo._id)}/>
+        </div> 
     )
 }
