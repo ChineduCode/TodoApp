@@ -3,17 +3,20 @@
 import Header from "@/components/Header"
 import CreateNewTodo from "@/components/CreateNewTodo"
 import TodoList from "./TodoList"
+import Loading from "./Loading"
 import { useState, useEffect } from "react"
 
 export default function Todo(){
     const [todos, setTodos] = useState([])
+    const [loading, setLoading] = useState(false)
     
     useEffect(()=> {
         async function fetchTodos(){
+            setLoading(true)
             const response = await fetch(`/api/todo`, {cache: 'no-store'})
             const data = await response.json()
             setTodos(data)
-            console.log(todos)
+            setLoading(false)
         }
 
         fetchTodos()
@@ -69,6 +72,7 @@ export default function Todo(){
             <section className="container">
                 <Header />
                 <CreateNewTodo />
+                <Loading />
 
                 <section className="todos_container">
                     <div className="todos">

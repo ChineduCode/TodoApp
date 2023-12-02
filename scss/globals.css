@@ -203,6 +203,37 @@ main.todo .add_new_todo_text {
   text-align: center;
 }
 
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.loading-container .loading-spinner {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #1877f2;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+.loading-container p {
+  margin-top: 16px;
+  font-weight: bold;
+  color: #65676b; /* Facebook's gray text color */
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 @media only screen and (min-width: 800px) {
   main.todo {
     background-image: url("../public/bg-desktop-light.jpg");
