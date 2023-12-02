@@ -1,14 +1,7 @@
-import Todos from "@/components/Todos"
-
-async function fetchTodos(){
-    const apiUrl = process.env.API_URL
-    const response = await fetch(`${apiUrl}/api/todo`)
-    const todos = await response.json()
-    return todos;
-}
+import TodoList from "@/components/TodoList"
 
 export default async function TodoPage(){
     return(
-        <Todos />
+        <TodoList />
     )
 }
