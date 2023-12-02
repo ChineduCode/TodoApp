@@ -77,7 +77,7 @@ export default function Todo(){
 
                     <section className="todos_container">
                         <div className="todos">
-                            { todos.map((todo, index) => <TodoList key={index} todo={todo} handleCompleted={handleCompleted} handleDelete={handleDelete}/> )}
+                            { todos.map((todo, index) => <TodoList key={index} todo={todo} onCompleted={handleCompleted} onDelete={handleDelete}/> )}
                         </div>
                         
                         <div className="bottom">
