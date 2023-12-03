@@ -9,6 +9,7 @@ import { useState, useEffect } from "react"
 export default function Todo(){
     const [todos, setTodos] = useState([])
     const [loading, setLoading] = useState(false)
+    const [notCompleted, setNotCompleted] = useState(0)
     
     useEffect(()=> {
         async function fetchTodos(){
@@ -16,6 +17,7 @@ export default function Todo(){
             const response = await fetch(`/api/todo`, {cache: 'no-store'})
             const data = await response.json()
             setTodos(data)
+            setNotCompleted(data.filter(data => data.completed === false))
             setLoading(false)
         }
 
@@ -63,10 +65,6 @@ export default function Todo(){
         console.log('Completed')
     }
 
-    //filter and get the length of todo.completed === false 
-    // const notCompleted = todos.filter(todo => !todo.completed)
-    const notCompleted = ''
-
     return(
         <main className="todo">
             <section className="container">
@@ -79,7 +77,7 @@ export default function Todo(){
                         <div className="todos">
                             { todos.map((todo, index) => <TodoList key={index} todo={todo} onCompleted={handleCompleted} onDelete={handleDelete}/> )}
                         </div>
-                        
+
                         <div className="bottom">
                             <span className="items_left">{notCompleted.length} items left</span>
                             <div className="filter">
@@ -91,7 +89,7 @@ export default function Todo(){
                         </div>
                     </section> 
                 }
-                
+
             </section>
         </main>
     )
