@@ -107,6 +107,12 @@ main.todo form {
   margin-top: 3rem;
   box-shadow: 0 0 15px hsl(235, 19%, 35%);
 }
+main.todo .no-todo {
+  color: hsl(235, 19%, 35%);
+  font-weight: bold;
+  text-align: center;
+  margin-top: 25%;
+}
 main.todo .todos_container {
   margin: 2rem 0;
   background-color: hsl(0, 0%, 100%);

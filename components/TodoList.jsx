@@ -11,7 +11,7 @@ export default function TodoList(){
     useEffect(()=> {
         async function fetchTodos(){
             setLoading(true)
-            const response = await fetch(`/api/todo`, { cache: 'no-store' })
+            const response = await fetch(`/api/todo`, { next: { revalidate : 10 } })
             const data = await response.json()
             setTodos(data)
             console.log(todos)
@@ -61,6 +61,17 @@ export default function TodoList(){
     
     function filterCompleted(){
         console.log('Completed')
+    }
+
+
+    if(todos.length < 1){
+        return( 
+            <>
+                { loading ? <Loading /> :
+                    <div className="no-todo">No to-do available</div>
+                }
+            </> 
+        )
     }
 
     return(
