@@ -11,7 +11,7 @@ export default function TodoList(){
     useEffect(()=> {
         async function fetchTodos(){
             setLoading(true)
-            const response = await fetch(`/api/todo`, { next: { revalidate : 10 } })
+            const response = await fetch(`/api/todo`, { cache : 'no-store' })
             const data = await response.json()
             setTodos(data)
             console.log(todos)
