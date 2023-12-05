@@ -53,7 +53,8 @@ export async function GET(){
     await connectDatabase()
 
     //GET TODO IF AUTHORIZED
-    const todos = await Todo.find({ user: session.user.id }, {__v:0})
+    let todos = await Todo.find({ user: session.user.id }, {__v:0})
+    todos = todos.reverse() //let the latest todo appear on top
     return NextResponse.json(todos)   
 }
 
