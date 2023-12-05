@@ -24,8 +24,6 @@ export default function CreateNewTodo(){
 
             if(res.ok){
                 setText('')
-                // router.refresh()
-                // router.push('/todo')
             }
 
         }catch (error) {
