@@ -28,7 +28,11 @@ export default function TodoList(){
         })
 
         if(res.ok){
-            console.log(`todo deleted`)
+            //fetch todo
+            const res = await fetch('/api/todo', {cache: 'no-store'})
+            const data = await res.json()
+            setTodos(data)
+
         }else {
             throw new Error('error deleting todo')
         }
@@ -41,7 +45,11 @@ export default function TodoList(){
         })
 
         if(res.ok){
-            console.log(`todo deleted`)
+            //fetch todo
+            const res = await fetch('/api/todo', {cache: 'no-store'})
+            const data = await res.json()
+            setTodos(data)
+
         }else {
             throw new Error('error deleting todo')
         }
