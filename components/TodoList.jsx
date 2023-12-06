@@ -51,12 +51,22 @@ export default function TodoList(){
             setTodos(data)
 
         }else {
-            throw new Error('error deleting todo')
+            throw new Error('error clearing todo')
         }
     }
 
-    function clearCompleted(){
-        console.log('all completed deleted')
+    async function clearCompleted(){
+        const res = await fetch('/api/todo', {
+            method: 'DELETE'
+        })
+
+        if(res.ok){
+            const res = await fetch('/api/todo', {cache: 'no-store'})
+            const data = await res.json()
+            setTodos(data)
+        }else{
+            throw new Error('error clearing completed todo')
+        }
     }
     
     function getAll(){
