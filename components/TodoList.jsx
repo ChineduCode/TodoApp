@@ -14,7 +14,6 @@ export default function TodoList(){
             const response = await fetch(`/api/todo`, { cache : 'no-store' })
             const data = await response.json()
             setTodos(data)
-            console.log(todos)
             setNotCompleted(data.filter(data => data.completed === false))
             setLoading(false)
         }
@@ -76,8 +75,7 @@ export default function TodoList(){
     async function filterAll(){
         const res = await fetch('/api/todo', {cache: 'no-store'})
         const data = await res.json()
-        console.log(data)
-        //setTodos(data)
+        setTodos(data)
     }
     
     //Get active todos
@@ -85,8 +83,7 @@ export default function TodoList(){
         const res = await fetch('/api/todo', {cache: 'no-store'})
         const data = await res.json()
         const activeTodo = data.filter(d => d.completed === false)
-        console.log(activeTodo)
-        // setTodos(activeTodo)
+        setTodos(activeTodo)
     }
     
     //Get completed todos
@@ -94,7 +91,7 @@ export default function TodoList(){
         const res = await fetch('/api/todo', {cache: 'no-store'})
         const data = await res.json()
         const completedTodo = data.filter(d => d.completed === true)
-        console.log(completedTodo)
+        setTodos(completedTodo)
     }
 
 
