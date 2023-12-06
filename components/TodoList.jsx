@@ -74,17 +74,26 @@ export default function TodoList(){
     
     //Get all todos
     async function getAll(){
-        console.log('All')
+        const res = await fetch('/api/todo', {cache: 'no-store'})
+        const data = await res.json()
+        setTodos(data)
     }
     
     //Get active todos
-    function filterActive(){
-        console.log('Active')
+    async function filterActive(){
+        const res = await fetch('/api/todo', {cache: 'no-store'})
+        const data = await res.json()
+        const activeTodo = data.filter(d => d.completed === false)
+        console.log(activeTodo)
+        // setTodos(activeTodo)
     }
     
     //Get completed todos
-    function filterCompleted(){
-        console.log('Completed')
+    async function filterCompleted(){
+        const res = await fetch('/api/todo', {cache: 'no-store'})
+        const data = await res.json()
+        const completedTodo = data.filter(d => d.completed === true)
+        console.log(completedTodo)
     }
 
 
