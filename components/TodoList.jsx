@@ -73,10 +73,11 @@ export default function TodoList(){
     }
     
     //Get all todos
-    async function getAll(){
+    async function filterAll(){
         const res = await fetch('/api/todo', {cache: 'no-store'})
         const data = await res.json()
-        setTodos(data)
+        console.log(data)
+        //setTodos(data)
     }
     
     //Get active todos
@@ -129,7 +130,7 @@ export default function TodoList(){
                     <div className="bottom">
                         <span className="items_left">{notCompleted.length} items left</span>
                             <div className="filter">
-                                <span className="all" onClick={getAll}>All</span>
+                                <span className="all" onClick={filterAll}>All</span>
                                 <span className="active" onClick={filterActive}>Active</span>
                                 <span className="completed" onClick={filterCompleted}>Completed</span>
                             </div>
