@@ -55,7 +55,7 @@ export default function TodoList(){
         }
     }
 
-    function deleteAllCompleted(){
+    function clearCompleted(){
         console.log('all completed deleted')
     }
     
@@ -108,7 +108,7 @@ export default function TodoList(){
                                 <span className="active" onClick={filterActive}>Active</span>
                                 <span className="completed" onClick={filterCompleted}>Completed</span>
                             </div>
-                        <span className="clear_completed" onClick={deleteAllCompleted}>Clear Completed</span>
+                        <span className="clear_completed" onClick={clearCompleted}>Clear Completed</span>
                     </div>
                 </section>
             }
