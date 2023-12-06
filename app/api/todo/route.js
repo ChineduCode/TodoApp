@@ -110,12 +110,26 @@ export async function DELETE(request){
     //connect to database
     await connectDatabase()
     
-    const deletedTodo = await Todo.findByIdAndDelete(id)
-    if(deletedTodo){
-        console.log('Todo deleted')
-        return NextResponse.json({msg: 'Todo deleted'})
+    //Delete for a particular id
+    if(id){
+        const deletedTodo = await Todo.findByIdAndDelete(id)
 
-    }else{
-        throw new Error('Cant delete todo try again later')
+        if(deletedTodo){
+            console.log('Todo deleted', id)
+            return NextResponse.json({msg: 'Todo deleted'})
+    
+        }else{
+            throw new Error('Cant delete todo try again later')
+        }
+    }
+
+    //Delete all completed todo
+    const deletedCompletedTodos = await Todo.deleteMany({completed: true})
+    if(deletedCompletedTodos){
+        console.log('completed todos cleared')
+        return NextResponse.json({msg: 'Todo deleted'})
+        
+    }else {
+        throw new Error('Failed to delete the completed todos')
     }
 }
