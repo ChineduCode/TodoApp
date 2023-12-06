@@ -21,7 +21,8 @@ export default function TodoList(){
 
         fetchTodos()
     }, [])
-
+    
+    //complete a todo
     async function handleCompleted(id){
         const res = await fetch(`/api/todo?id=${id}`, {
             method: 'PUT'
@@ -37,7 +38,8 @@ export default function TodoList(){
             throw new Error('error deleting todo')
         }
     }
-
+    
+    //delete a todo
     async function handleDelete(id){
         console.log(id)
         const res = await fetch(`/api/todo?id=${id}`, {
@@ -54,7 +56,8 @@ export default function TodoList(){
             throw new Error('error clearing todo')
         }
     }
-
+    
+    //clear completed todos
     async function clearCompleted(){
         const res = await fetch('/api/todo', {
             method: 'DELETE'
@@ -69,14 +72,17 @@ export default function TodoList(){
         }
     }
     
-    function getAll(){
+    //Get all todos
+    async function getAll(){
         console.log('All')
     }
     
+    //Get active todos
     function filterActive(){
         console.log('Active')
     }
     
+    //Get completed todos
     function filterCompleted(){
         console.log('Completed')
     }
