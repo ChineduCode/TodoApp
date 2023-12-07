@@ -2,8 +2,10 @@
 
 import Loading from "./Loading"
 import { useState, useEffect } from "react"
+import { useSession } from "next-auth/react"
 
 export default function TodoList(){
+    const {data: session}= useSession()
     const [todos, setTodos] = useState([])
     const [loading, setLoading] = useState(false)
     const [notCompleted, setNotCompleted] = useState(0)

@@ -48,6 +48,7 @@ export async function GET(){
             {status: 401}
         )
     }
+    
 
     //connect to db
     await connectDatabase()
