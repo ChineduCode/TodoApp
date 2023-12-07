@@ -3,7 +3,6 @@ import CreateNewTodo from "@/components/CreateNewTodo"
 import TodoList from "./TodoList"
 
 export default async function Todo(){
-
     return(
         <main className="todo">
             <section className="container">

@@ -1,9 +1,11 @@
 'use client'
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 
 export default function CreateNewTodo(){
     const [text, setText] = useState('')
+    const router = useRouter()
 
     async function handleSubmit(e){
         e.preventDefault()
@@ -26,7 +28,7 @@ export default function CreateNewTodo(){
 
         }catch (error) {
             console.log(error)
-            throw new Error(error)
+            throw new Error(error.message)
         }
     }
 
