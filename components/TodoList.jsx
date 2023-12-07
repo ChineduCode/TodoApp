@@ -24,7 +24,7 @@ export default function TodoList(){
             fetchTodos()
         }
 
-    }, [])
+    }, [session])
     
     //complete a todo
     async function handleCompleted(id){
