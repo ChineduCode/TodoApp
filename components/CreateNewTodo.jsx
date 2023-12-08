@@ -2,10 +2,14 @@
 
 import { useState } from "react"
 import { useRouter } from "next/navigation"
+import { useSession } from "next-auth/react"
 
 export default function CreateNewTodo(){
+    const {data: session} = useSession()
     const [text, setText] = useState('')
     const router = useRouter()
+
+    console.log(session)
 
     async function handleSubmit(e){
         e.preventDefault()
