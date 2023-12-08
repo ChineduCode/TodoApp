@@ -12,7 +12,7 @@ export default async function Todo(){
             <section className="container">
                 <Header />
                 <CreateNewTodo />
-                {/* <TodoList /> */}
+                <TodoList />
             </section>
         </main>
     )
