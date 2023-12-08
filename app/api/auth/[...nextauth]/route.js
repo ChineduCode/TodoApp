@@ -40,18 +40,6 @@ export const authOptions = {
                     }
             
                     return user;
-
-                    // const user = {
-                    //     name : 'chineducode',
-                    //     address: 'no.6 Isingwu street, nkpor-agu',
-                    //     postalCode: 40411
-                    // }
-
-                    // if(username === user.name){
-                    //     return user
-                    // }else{
-                    //     return null
-                    // }
             
                 } catch (error) {
                     console.log(error.message)
