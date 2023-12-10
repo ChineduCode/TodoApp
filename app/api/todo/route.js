@@ -46,8 +46,8 @@ export async function GET(){
         return new Response(
             JSON.stringify({msg: 'Unauthorized'}), 
             {status: 401}
-            )
-        }
+        )
+    }
         
 
     //connect to db
