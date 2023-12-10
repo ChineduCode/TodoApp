@@ -53,43 +53,43 @@ export const authOptions = {
     },
 
     callbacks: {
-        async jwt({ token, user, session }) {
-            console.log('jwt callback ', { token, user, session })
+        // async jwt({ token, user, session }) {
+        //     console.log('jwt callback ', { token, user, session })
 
-            if(user){
-                return {
-                    ...token,
-                    id: user.id,
-                    username: user.username
-                }
-            }
-            return token
-        },
-
-        async session({ session, token, user }){
-            console.log('session callback', {session, token, user})
-            
-            return {
-                ...session,
-                user: {
-                    ...session.user,
-                    id: token.id,
-                    username: token.username
-                }
-            }
-        
-        }
-
-        // async jwt({token, user}){
-        //     console.log('jwt callback', {token, user})
-        //     return({...token, ...user})
+        //     if(user){
+        //         return {
+        //             ...token,
+        //             id: user.id,
+        //             username: user.username
+        //         }
+        //     }
+        //     return token
         // },
 
-        // async session({session, token, user}){
-        //     session.user = token
+        // async session({ session, token, user }){
         //     console.log('session callback', {session, token, user})
-        //     return session
+            
+        //     return {
+        //         ...session,
+        //         user: {
+        //             ...session.user,
+        //             id: token.id,
+        //             username: token.username
+        //         }
+        //     }
+        
         // }
+
+        async jwt({token, user}){
+            console.log('jwt callback', {token, user})
+            return({...token, ...user})
+        },
+
+        async session({session, token, user}){
+            session.user = token
+            console.log('session callback', {session, token, user})
+            return session
+        }
     }
 }
 
