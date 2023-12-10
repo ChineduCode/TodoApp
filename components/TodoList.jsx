@@ -6,7 +6,7 @@ import { useSession } from "next-auth/react"
 
 export default function TodoList(){
     const {data: session} = useSession()
-    const [todos, setTodos] = useState([])
+    const [todos, setTodos] = useState(null)
     const [loading, setLoading] = useState(false)
     const [notCompleted, setNotCompleted] = useState(0)
     
@@ -100,7 +100,7 @@ export default function TodoList(){
     }
 
 
-    if(todos.length < 1){
+    if(todos === null){
         return( 
             <>
                 { loading ? <Loading /> :
