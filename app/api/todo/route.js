@@ -31,7 +31,7 @@ export async function POST(request){
 
     const todo = await Todo.create({
         text,
-        user: session.user.id
+        user: session.user.sub
     })
 
     return NextResponse.json(todo)
