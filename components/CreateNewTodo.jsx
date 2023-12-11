@@ -38,7 +38,7 @@ export default function CreateNewTodo(){
     }
 
     return(
-        <form action="" className="create_new_todo" onSubmit={handleSubmit}>
+        <form className="create_new_todo" onSubmit={handleSubmit}>
             <div className="control">
                 <input 
                     type="text" 
@@ -47,6 +47,8 @@ export default function CreateNewTodo(){
                     onChange={(e)=> setText(e.target.value)}
                     placeholder="Create a new todo..."
                 />
+
+                <AddTodoBtn />
             </div>
         </form>
     )

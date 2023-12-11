@@ -116,6 +116,26 @@ main.todo{
   form{
     margin-top: 3rem;
     box-shadow: 0 0 15px hsl(235, 19%, 35%);
+
+    .control{
+      display: flex;
+      align-items: center;
+      border-radius: 7px;
+      overflow: hidden;
+      input{
+        border-radius: unset;
+      }
+      
+      .add-todo-btn{
+        padding: 15px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: hsl(235, 19%, 35%);
+        color: hsl(236, 33%, 92%);
+        font-weight: bold;
+        cursor: pointer;
+      }
+    }
   }
 
   .no-todo{
