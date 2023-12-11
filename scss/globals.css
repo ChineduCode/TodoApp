@@ -115,6 +115,7 @@ main.todo form .control {
 }
 main.todo form .control input {
   border-radius: unset;
+  font-family: inherit;
 }
 main.todo form .control .add-todo-btn {
   padding: 15px 20px;
@@ -124,6 +125,7 @@ main.todo form .control .add-todo-btn {
   color: hsl(236, 33%, 92%);
   font-weight: bold;
   cursor: pointer;
+  font-family: inherit;
 }
 main.todo .no-todo {
   color: hsl(235, 19%, 35%);
