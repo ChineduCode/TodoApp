@@ -9,7 +9,7 @@ export default function TodoList(){
     const [todos, setTodos] = useState(null)
     const [loading, setLoading] = useState(false)
     const [notCompleted, setNotCompleted] = useState(0)
-    
+    console.log(session)
     useEffect(()=> {
         async function fetchTodos(){
             setLoading(true)
