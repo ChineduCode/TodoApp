@@ -1,6 +1,6 @@
 export default function AddTodoBtn(){
     return(
-        <button 
+        <button
             className="add-todo-btn"
             type="submit"
         >
