@@ -43,7 +43,6 @@ export default function TodoList({todoAdded, setTodoAdded}){
     
     //delete a todo
     async function handleDelete(id){
-        console.log(id)
         const res = await fetch(`/api/todo?id=${id}`, {
             method: 'DELETE'
         })
