@@ -22,12 +22,9 @@ export async function POST(request){
     try {
         //connect to database
         await connectDatabase()
-        
-        //transform username to lowercase
-        username = username.toLowerCase()
 
         //Check if user already exists
-        const userExist = await User.findOne({username})
+        const userExist = await User.findOne({username: { $regex: new RegExp('^' + username + '$', 'i') }})
         if(userExist){
             return new Response('User already exists', {status : 400})
         }
@@ -35,7 +32,6 @@ export async function POST(request){
         //hashPassword
         const salt = await bcrypt.genSalt(10)
         const hashedPassword = await bcrypt.hash(password, salt)
-
 
         //Register user
         const user = await User.create({

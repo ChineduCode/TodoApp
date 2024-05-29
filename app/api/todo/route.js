@@ -10,18 +10,17 @@ export async function POST(request){
     //CHECK IF USER IS AUTHORIZED
     if(!session || !session.user){
         return new Response(
-            JSON.stringify({msg: 'Unauthorized'}), 
+            JSON.stringify({message: 'Unauthorized'}), 
             {status: 401}
         )
     }
-    
 
     //CREATE TODO IF AUTHORIZED
     const res = await request.json()
     const { text } = res
     if(!text){
         return new Response(
-            JSON.stringify({msg: 'Fill all fields'}),
+            JSON.stringify({message: 'Fill all fields'}),
             {status: 400}
         )
     }
@@ -44,11 +43,10 @@ export async function GET(){
     //CHECK IF USER IS AUTHORIZED
     if(!session || !session.user){
         return new Response(
-            JSON.stringify({msg: 'Unauthorized'}), 
+            JSON.stringify({message: 'Unauthorized'}), 
             {status: 401}
         )
     }
-        
 
     //connect to db
     await connectDatabase()
@@ -59,18 +57,16 @@ export async function GET(){
     return NextResponse.json(todos)   
 }
 
-
 //UPDATE TODO
 export async function PUT(request){
     const session = await getServerSession(authOptions)
     //CHECK IF USER IS AUTHORIZED
     if(!session || !session.user){
         return new Response(
-            JSON.stringify({msg: 'Unauthorized'}), 
+            JSON.stringify({message: 'Unauthorized'}), 
             {status: 401}
         )
     }
-
 
     //UPDATE IF AUTHORIZED
     const { searchParams } = new URL(request.url)
@@ -98,12 +94,11 @@ export async function DELETE(request){
     //CHECK IF USER IS AUTHORIZED
     if(!session || !session.user){
         return new Response(
-            JSON.stringify({msg: 'Unauthorized'}), 
+            JSON.stringify({message: 'Unauthorized'}), 
             {status: 401}
         )
     }
 
-    
     //DELETE IF AUTHORIZED
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
@@ -117,7 +112,7 @@ export async function DELETE(request){
 
         if(deletedTodo){
             console.log('Todo deleted', id)
-            return NextResponse.json({msg: 'Todo deleted'})
+            return NextResponse.json({message: 'Todo deleted'})
     
         }else{
             throw new Error('Cant delete todo try again later')
@@ -128,7 +123,7 @@ export async function DELETE(request){
     const deletedCompletedTodos = await Todo.deleteMany({completed: true})
     if(deletedCompletedTodos){
         console.log('completed todos cleared')
-        return NextResponse.json({msg: 'Todo deleted'})
+        return NextResponse.json({message: 'Todo deleted'})
         
     }else {
         throw new Error('Failed to delete the completed todos')

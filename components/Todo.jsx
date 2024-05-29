@@ -1,14 +1,12 @@
 import Header from "@/components/Header"
-import CreateNewTodo from "@/components/CreateNewTodo"
-import TodoList from "./TodoList"
+import Todos from "./Todos"
 
 export default async function Todo(){
     return(
         <main className="todo">
             <section className="container">
                 <Header />
-                <CreateNewTodo />
-                <TodoList />
+                <Todos />
             </section>
         </main>
     )

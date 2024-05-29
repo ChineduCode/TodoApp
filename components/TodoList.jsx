@@ -2,29 +2,27 @@
 
 import Loading from "./Loading"
 import { useState, useEffect } from "react"
-import { useSession } from "next-auth/react"
 
-export default function TodoList(){
-    const {data: session} = useSession()
-    const [todos, setTodos] = useState(null)
+export default function TodoList({todoAdded, setTodoAdded}){
+    const [todos, setTodos] = useState([])
     const [loading, setLoading] = useState(false)
     const [notCompleted, setNotCompleted] = useState(0)
-    console.log(session)
+
     useEffect(()=> {
         async function fetchTodos(){
             setLoading(true)
-            const response = await fetch(`/api/todo`, { cache : 'no-store' })
+            const response = await fetch(`/api/todo`)
             const data = await response.json()
             setTodos(data)
             setNotCompleted(data.filter(data => data.completed === false))
             setLoading(false)
         }
 
-        if(session){
-            fetchTodos()
-        }
+        fetchTodos()
 
-    }, [session])
+        setTodoAdded(false)
+
+    }, [todoAdded])
     
     //complete a todo
     async function handleCompleted(id){
@@ -99,8 +97,7 @@ export default function TodoList(){
         setTodos(completedTodo)
     }
 
-
-    if(todos === null){
+    if(todos.length === 0){
         return( 
             <>
                 { loading ? <Loading /> :

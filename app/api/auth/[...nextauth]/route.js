@@ -23,10 +23,7 @@ export const authOptions = {
                     //connect to database
                     await connectDatabase()
             
-                    //transform username to lowercase
-                    username = username.toLowerCase()
-            
-                    const user = await User.findOne({username})
+                    const user = await User.findOne({username: { $regex: new RegExp('^' + username + '$', 'i') }})
             
                     //check if user does not exist
                     if(!user){
