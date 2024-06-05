@@ -36,7 +36,6 @@ export async function POST(request){
     return NextResponse.json(todo)
 }
 
-
 //GET TODO
 export async function GET(){
     const session = await getServerSession(authOptions)
@@ -80,18 +79,17 @@ export async function PUT(request){
 
         if(todo){
             await Todo.findByIdAndUpdate(id, {completed: !todo.completed}, {new: true})
-            return NextResponse.json({ msg: 'Todo status toggled'});
+            return NextResponse.json({ message: 'Todo status toggled'});
         }else{
-            return NextResponse.json({ msg: 'Todo not found' }, { status: 404 });
+            return NextResponse.json({ message: 'Todo not found' }, { status: 404 });
         }
         
     } catch (error) {
         console.log(error.message)
-        return NextResponse.json({msg: 'Server error'}, {status: 500})
+        return NextResponse.json({message: 'Server error'}, {status: 500})
     }
 
 }
-
 
 //DELETE TODO
 export async function DELETE(request){
