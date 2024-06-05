@@ -71,18 +71,23 @@ export async function PUT(request){
     //UPDATE IF AUTHORIZED
     const { searchParams } = new URL(request.url)
     const id = searchParams.get('id')
+    
+    try {
+        //connect to database
+        await connectDatabase()
+    
+        const todo = await Todo.findById(id)
 
-    //connect to database
-    await connectDatabase()
-
-    const completedTodo = await Todo.findByIdAndUpdate(id, { completed: true }, { new: true })
-
-    if(completedTodo){
-        console.log('todo completed')
-        return NextResponse.json({msg: 'Todo completed'})
-
-    }else{
-        throw new Error('Todo not completed')
+        if(todo){
+            await Todo.findByIdAndUpdate(id, {completed: !todo.completed}, {new: true})
+            return NextResponse.json({ msg: 'Todo status toggled'});
+        }else{
+            return NextResponse.json({ msg: 'Todo not found' }, { status: 404 });
+        }
+        
+    } catch (error) {
+        console.log(error.message)
+        return NextResponse.json({msg: 'Server error'}, {status: 500})
     }
 
 }

@@ -40,7 +40,6 @@ export async function POST(request){
         })
 
         if(user){
-            console.log(user)
             return new Response('User registered', {status : 200})
 
         }else{
